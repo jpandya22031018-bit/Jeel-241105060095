@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secure Messaging System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <header class="top-header">
+
+            <h1>🔐 Secure Messaging System</h1>
+
+            <p>AES Message Encryption + RSA Key Encryption</p>
+
+        </header>
+
+
+        <main class="container">
+
+
+            <!-- ENCRYPT PANEL -->
+
+            <section class="panel">
+
+                <h2>1. Encrypt Message</h2>
+
+                <div class="divider"></div>
+
+
+                <label>Plaintext Message</label>
+
+                <textarea
+                    id="plaintext"
+                    placeholder="Type your secret message here..."
+                ></textarea>
+
+
+                <button
+                    id="encryptBtn"
+                    class="primary-btn"
+                >
+                    Encrypt Message
+                </button>
+
+
+
+                <label>
+                    1. Encrypted AES Key (RSA Encrypted)
+                </label>
+
+                <textarea
+                    id="encryptedKey"
+                    class="readonly-output"
+                    readonly
+                ></textarea>
+
+
+
+                <label>
+                    2. Initialization Vector (IV)
+                </label>
+
+                <input
+                    id="iv"
+                    class="readonly-output"
+                    type="text"
+                    readonly
+                >
+
+
+
+                <label>
+                    3. Ciphertext (AES Encrypted)
+                </label>
+
+                <textarea
+                    id="ciphertext"
+                    class="readonly-output"
+                    readonly
+                ></textarea>
+
+
+
+                <button
+                    id="autoFillBtn"
+                    class="outline-btn"
+                >
+                    Auto-Fill Decrypt Panel →
+                </button>
+
+            </section>
+
+
+
+            <!-- DECRYPT PANEL -->
+
+            <section class="panel">
+
+                <h2>2. Decrypt Message</h2>
+
+                <div class="divider"></div>
+
+
+
+                <label>Encrypted AES Key</label>
+
+                <textarea
+                    id="decryptKey"
+                    placeholder="Paste Base64 Encrypted Key"
+                ></textarea>
+
+
+
+                <label>
+                    Initialization Vector (IV)
+                </label>
+
+                <input
+                    id="decryptIV"
+                    type="text"
+                    placeholder="Paste Base64 IV"
+                >
+
+
+
+                <label>Ciphertext</label>
+
+                <textarea
+                    id="decryptCiphertext"
+                    placeholder="Paste Base64 Ciphertext"
+                ></textarea>
+
+
+
+                <button
+                    id="decryptBtn"
+                    class="primary-btn"
+                >
+                    Decrypt Message
+                </button>
+
+
+
+                <label>
+                    Decrypted Plaintext Output
+                </label>
+
+                <div
+                    id="decryptedOutput"
+                    class="decrypted-output"
+                >
+                    Waiting for decryption...
+                </div>
+
+            </section>
+
+        </main>
+
+
+
+        <!-- STATUS -->
+
+        <section class="status-box">
+
+            <strong>Status:</strong>
+
+            <span id="status">
+                Ready. Enter a message and click Encrypt Message.
+            </span>
+
+        </section>
+
+
+
+        <footer>
+
+            <p>
+                Educational Hybrid Encryption Project
+                • AES-GCM + RSA-OAEP
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
