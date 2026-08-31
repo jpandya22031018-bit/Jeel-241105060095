@@ -1,254 +1,196 @@
-/* =========================
-   BASIC RESET
-========================= */
+<!DOCTYPE html>
+<html lang="en">
 
-* {
-    box-sizing: border-box;
-}
+<head>
+    <meta charset="UTF-8">
 
-body {
-    margin: 0;
-    padding: 0;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    background: #201e36;
-    color: #f4f1f7;
+    <title>Secure Messaging System</title>
 
-    font-family: "Courier New", monospace;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
 
-/* =========================
-   COMPLETE PAGE
-========================= */
+    <div class="page-wrapper">
 
-.page-wrapper {
-    min-height: 100vh;
-}
+        <!-- HEADER -->
+        <header class="top-header">
 
+            <h1>🔐 Secure Messaging System</h1>
 
-/* =========================
-   HEADER
-========================= */
+            <p>AES Message Encryption + RSA Key Encryption</p>
 
-.top-header {
-    text-align: center;
+        </header>
 
-    padding: 30px 20px;
 
-    background: #302d4a;
+        <!-- MAIN CONTENT -->
+        <main class="container">
 
-    border-bottom: 1px solid #56516f;
-}
 
-.top-header h1 {
-    margin: 0;
+            <!-- ENCRYPT PANEL -->
+            <section class="panel">
 
-    font-size: 30px;
-    letter-spacing: 1px;
-}
+                <h2>1. Encrypt Message</h2>
 
-.top-header p {
-    margin-top: 10px;
-    margin-bottom: 0;
+                <div class="divider"></div>
 
-    color: #c8c2d8;
 
-    font-size: 15px;
-}
+                <label for="plaintext">Plaintext Message</label>
 
+                <textarea
+                    id="plaintext"
+                    placeholder="Type your secret message here..."
+                ></textarea>
 
-/* =========================
-   MAIN CONTAINER
-========================= */
 
-.container {
-    width: 100%;
-    max-width: 1300px;
+                <button
+                    id="encryptBtn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    Encrypt Message
+                </button>
 
-    margin: 0 auto;
 
-    padding: 40px;
+                <label for="encryptedKey">
+                    1. Encrypted AES Key (RSA Encrypted)
+                </label>
 
-    display: grid;
+                <textarea
+                    id="encryptedKey"
+                    class="readonly-output"
+                    readonly
+                ></textarea>
 
-    grid-template-columns: 1fr 1fr;
 
-    gap: 30px;
+                <label for="iv">
+                    2. Initialization Vector (IV)
+                </label>
 
-    align-items: start;
-}
+                <input
+                    id="iv"
+                    class="readonly-output"
+                    type="text"
+                    readonly
+                >
 
 
-/* =========================
-   PANELS
-========================= */
+                <label for="ciphertext">
+                    3. Ciphertext (AES Encrypted)
+                </label>
 
-.panel {
-    background: #302d4a;
+                <textarea
+                    id="ciphertext"
+                    class="readonly-output"
+                    readonly
+                ></textarea>
 
-    border: 1px solid #57536f;
 
-    border-radius: 14px;
+                <button
+                    id="autoFillBtn"
+                    class="outline-btn"
+                    type="button"
+                >
+                    Auto-Fill Decrypt Panel →
+                </button>
 
-    padding: 28px;
+            </section>
 
-    min-height: 650px;
-}
 
 
-/* =========================
-   PANEL TITLE
-========================= */
+            <!-- DECRYPT PANEL -->
+            <section class="panel">
 
-.panel h2 {
-    margin: 0;
+                <h2>2. Decrypt Message</h2>
 
-    font-size: 24px;
-}
+                <div class="divider"></div>
 
 
-/* =========================
-   DIVIDER
-========================= */
+                <label for="decryptKey">
+                    Encrypted AES Key
+                </label>
 
-.divider {
-    height: 1px;
+                <textarea
+                    id="decryptKey"
+                    placeholder="Paste Base64 Encrypted Key"
+                ></textarea>
 
-    width: 100%;
 
-    background: #56516f;
+                <label for="decryptIV">
+                    Initialization Vector (IV)
+                </label>
 
-    margin-top: 20px;
-    margin-bottom: 25px;
-}
+                <input
+                    id="decryptIV"
+                    type="text"
+                    placeholder="Paste Base64 IV"
+                >
 
 
-/* =========================
-   LABELS
-========================= */
+                <label for="decryptCiphertext">
+                    Ciphertext
+                </label>
 
-.panel label {
-    display: block;
+                <textarea
+                    id="decryptCiphertext"
+                    placeholder="Paste Base64 Ciphertext"
+                ></textarea>
 
-    margin-top: 22px;
-    margin-bottom: 9px;
 
-    color: #d7d2e4;
+                <button
+                    id="decryptBtn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    Decrypt Message
+                </button>
 
-    font-family: Arial, sans-serif;
 
-    font-size: 14px;
+                <label>
+                    Decrypted Plaintext Output
+                </label>
 
-    font-weight: bold;
-}
+                <div
+                    id="decryptedOutput"
+                    class="decrypted-output"
+                >
+                    Waiting for decryption...
+                </div>
 
+            </section>
 
-/* First label spacing */
+        </main>
 
-.panel .divider + label {
-    margin-top: 0;
-}
 
+        <!-- STATUS -->
+        <section class="status-box">
 
-/* =========================
-   INPUTS AND TEXTAREAS
-========================= */
+            <strong>Status:</strong>
 
-.panel input,
-.panel textarea {
-    display: block;
+            <span id="status">
+                Generating RSA keys...
+            </span>
 
-    width: 100%;
+        </section>
 
-    background: #1e1b2e;
 
-    color: #f5f3ff;
+        <!-- FOOTER -->
+        <footer>
 
-    border: 1px solid #625d7c;
+            <p>
+                Educational Hybrid Encryption Project
+                • AES-GCM + RSA-OAEP
+            </p>
 
-    border-radius: 8px;
+        </footer>
 
-    padding: 13px;
+    </div>
 
-    font-family: "Courier New", monospace;
 
-    font-size: 14px;
-}
+    <script src="script.js"></script>
 
+</body>
 
-/* Textareas */
-
-.panel textarea {
-    min-height: 95px;
-
-    resize: vertical;
-}
-
-
-/* Input */
-
-.panel input {
-    height: 48px;
-}
-
-
-/* =========================
-   FOCUS EFFECT
-========================= */
-
-.panel input:focus,
-.panel textarea:focus {
-    outline: none;
-
-    border-color: #9b8ae6;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(155, 138, 230, 0.15);
-}
-
-
-/* =========================
-   READ ONLY OUTPUT
-========================= */
-
-.readonly-output {
-    background: #1a1829 !important;
-
-    color: #d5d0e5 !important;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-    display: inline-block;
-
-    margin-top: 20px;
-
-    padding: 13px 22px;
-
-    border-radius: 8px;
-
-    font-family: "Courier New", monospace;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-
-/* =========================
-   PRIMARY BUTTON
-========================= */
-
-.primary-btn {
-    border: none;
-
-   
+</html>
