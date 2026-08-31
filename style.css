@@ -4,10 +4,16 @@
 
 body {
     margin: 0;
+    padding: 0;
     background: #201e36;
     color: #f4f1f7;
     font-family: "Courier New", monospace;
 }
+
+.page-wrapper {
+    min-height: 100vh;
+}
+
 
 /* HEADER */
 
@@ -15,80 +21,85 @@ body {
     text-align: center;
     padding: 28px 20px;
     background: #302d4a;
-    border-bottom: 1px solid #4c4967;
+    border-bottom: 1px solid #56516f;
 }
 
 .top-header h1 {
     margin: 0;
     font-size: 30px;
+    letter-spacing: 1px;
 }
 
 .top-header p {
     margin: 10px 0 0;
-    color: #c7c2d8;
+    color: #c8c2d8;
+    font-size: 15px;
 }
 
-/* MAIN TWO COLUMN LAYOUT */
+
+/* MAIN LAYOUT */
 
 .container {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 35px 40px;
+    padding: 40px;
 
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    align-items: start;
 }
 
-/* ENCRYPT AND DECRYPT BOX */
+
+/* PANELS */
 
 .panel {
     background: #302d4a;
     border: 1px solid #57536f;
     border-radius: 14px;
     padding: 28px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
 }
 
 .panel h2 {
-    margin: 0 0 18px 0;
+    margin: 0;
     font-size: 24px;
 }
 
-/* LINE BELOW HEADING */
+
+/* DIVIDER */
 
 .divider {
     height: 1px;
-    background: #56516f;
-    margin-bottom: 25px;
-}
-
-/* EACH INPUT SECTION */
-
-.form-group {
     width: 100%;
-    margin-bottom: 22px;
+    background: #56516f;
+    margin: 20px 0 25px;
 }
+
 
 /* LABELS */
 
-label {
+.panel label {
     display: block;
-    margin-bottom: 9px;
+    margin: 22px 0 9px;
 
-    color: #d2cde0;
+    color: #d7d2e4;
 
     font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: bold;
 }
 
+.panel .divider + label {
+    margin-top: 0;
+}
+
+
 /* INPUTS */
 
-input,
-textarea {
+.panel input,
+.panel textarea {
     display: block;
     width: 100%;
 
@@ -104,59 +115,69 @@ textarea {
     font-size: 14px;
 }
 
-input {
+.panel input {
     height: 48px;
 }
 
-textarea {
+.panel textarea {
     min-height: 95px;
     resize: vertical;
 }
 
-/* FOCUS EFFECT */
-
-input:focus,
-textarea:focus {
+.panel input:focus,
+.panel textarea:focus {
     outline: none;
     border-color: #9b8ae6;
-
     box-shadow: 0 0 0 3px rgba(155, 138, 230, 0.15);
 }
+
+
+/* READONLY FIELDS */
+
+.readonly-output {
+    background: #1a1829 !important;
+    color: #d5d0e5 !important;
+}
+
 
 /* BUTTONS */
 
 button {
+    margin-top: 20px;
+
     padding: 13px 22px;
 
-    border: none;
     border-radius: 8px;
 
     font-family: "Courier New", monospace;
+    font-size: 14px;
     font-weight: bold;
 
     cursor: pointer;
+
+    transition: 0.2s;
 }
+
 
 /* MAIN BUTTON */
 
 .primary-btn {
+    border: none;
     background: #9784df;
-    color: #1d1930;
-
-    margin-bottom: 25px;
+    color: #201e36;
 }
 
 .primary-btn:hover {
-    background: #a996ed;
+    background: #ab98f0;
     color: white;
 }
+
 
 /* AUTO FILL BUTTON */
 
 .outline-btn {
     background: transparent;
-    color: #d6ccff;
-
+    color: #d8ceff;
     border: 1px solid #9784df;
 }
 
@@ -164,10 +185,12 @@ button {
     background: rgba(151, 132, 223, 0.15);
 }
 
+
 /* DECRYPTED OUTPUT */
 
 .decrypted-output {
-    min-height: 70px;
+    width: 100%;
+    min-height: 80px;
 
     padding: 15px;
 
@@ -181,54 +204,75 @@ button {
     word-break: break-word;
 }
 
+
 /* STATUS */
 
 .status-box {
+    width: calc(100% - 80px);
     max-width: 1220px;
 
     margin: 0 auto 25px;
-    padding: 15px 20px;
+
+    padding: 18px 20px;
 
     background: #302d4a;
 
     border: 1px solid #57536f;
     border-radius: 10px;
 
-    color: #d2cde0;
+    color: #d7d2e4;
 }
+
+.status-box strong {
+    color: #b9a9ff;
+}
+
 
 /* FOOTER */
 
 footer {
     text-align: center;
     padding: 20px;
-
     color: #aaa4bd;
+    font-size: 13px;
 }
 
-/* MOBILE */
+
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
 
     .container {
         grid-template-columns: 1fr;
-        padding: 25px 20px;
+        padding: 25px;
     }
 
 }
 
 @media (max-width: 600px) {
 
+    .container {
+        padding: 18px;
+    }
+
     .panel {
         padding: 20px;
     }
 
     .top-header h1 {
-        font-size: 23px;
+        font-size: 22px;
+    }
+
+    .panel h2 {
+        font-size: 20px;
     }
 
     button {
         width: 100%;
+    }
+
+    .status-box {
+        width: calc(100% - 36px);
     }
 
 }
