@@ -1,198 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+/* =========================
+   BASIC RESET
+========================= */
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+* {
+    box-sizing: border-box;
+}
 
-    <title>Secure Messaging System</title>
+body {
+    margin: 0;
+    padding: 0;
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    background: #201e36;
+    color: #f4f1f7;
 
-<body>
+    font-family: "Courier New", monospace;
+}
 
-    <div class="page-wrapper">
 
-        <header class="top-header">
+/* =========================
+   COMPLETE PAGE
+========================= */
 
-            <h1>🔐 Secure Messaging System</h1>
+.page-wrapper {
+    min-height: 100vh;
+}
 
-            <p>AES Message Encryption + RSA Key Encryption</p>
 
-        </header>
+/* =========================
+   HEADER
+========================= */
 
+.top-header {
+    text-align: center;
 
-        <main class="container">
+    padding: 30px 20px;
 
+    background: #302d4a;
 
-            <!-- ENCRYPT PANEL -->
+    border-bottom: 1px solid #56516f;
+}
 
-            <section class="panel">
+.top-header h1 {
+    margin: 0;
 
-                <h2>1. Encrypt Message</h2>
+    font-size: 30px;
+    letter-spacing: 1px;
+}
 
-                <div class="divider"></div>
+.top-header p {
+    margin-top: 10px;
+    margin-bottom: 0;
 
+    color: #c8c2d8;
 
-                <label>Plaintext Message</label>
+    font-size: 15px;
+}
 
-                <textarea
-                    id="plaintext"
-                    placeholder="Type your secret message here..."
-                ></textarea>
 
+/* =========================
+   MAIN CONTAINER
+========================= */
 
-                <button
-                    id="encryptBtn"
-                    class="primary-btn"
-                >
-                    Encrypt Message
-                </button>
+.container {
+    width: 100%;
+    max-width: 1300px;
 
+    margin: 0 auto;
 
+    padding: 40px;
 
-                <label>
-                    1. Encrypted AES Key (RSA Encrypted)
-                </label>
+    display: grid;
 
-                <textarea
-                    id="encryptedKey"
-                    class="readonly-output"
-                    readonly
-                ></textarea>
+    grid-template-columns: 1fr 1fr;
 
+    gap: 30px;
 
+    align-items: start;
+}
 
-                <label>
-                    2. Initialization Vector (IV)
-                </label>
 
-                <input
-                    id="iv"
-                    class="readonly-output"
-                    type="text"
-                    readonly
-                >
+/* =========================
+   PANELS
+========================= */
 
+.panel {
+    background: #302d4a;
 
+    border: 1px solid #57536f;
 
-                <label>
-                    3. Ciphertext (AES Encrypted)
-                </label>
+    border-radius: 14px;
 
-                <textarea
-                    id="ciphertext"
-                    class="readonly-output"
-                    readonly
-                ></textarea>
+    padding: 28px;
 
+    min-height: 650px;
+}
 
 
-                <button
-                    id="autoFillBtn"
-                    class="outline-btn"
-                >
-                    Auto-Fill Decrypt Panel →
-                </button>
+/* =========================
+   PANEL TITLE
+========================= */
 
-            </section>
+.panel h2 {
+    margin: 0;
 
+    font-size: 24px;
+}
 
 
-            <!-- DECRYPT PANEL -->
+/* =========================
+   DIVIDER
+========================= */
 
-            <section class="panel">
+.divider {
+    height: 1px;
 
-                <h2>2. Decrypt Message</h2>
+    width: 100%;
 
-                <div class="divider"></div>
+    background: #56516f;
 
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
 
 
-                <label>Encrypted AES Key</label>
+/* =========================
+   LABELS
+========================= */
 
-                <textarea
-                    id="decryptKey"
-                    placeholder="Paste Base64 Encrypted Key"
-                ></textarea>
+.panel label {
+    display: block;
 
+    margin-top: 22px;
+    margin-bottom: 9px;
 
+    color: #d7d2e4;
 
-                <label>
-                    Initialization Vector (IV)
-                </label>
+    font-family: Arial, sans-serif;
 
-                <input
-                    id="decryptIV"
-                    type="text"
-                    placeholder="Paste Base64 IV"
-                >
+    font-size: 14px;
 
+    font-weight: bold;
+}
 
 
-                <label>Ciphertext</label>
+/* First label spacing */
 
-                <textarea
-                    id="decryptCiphertext"
-                    placeholder="Paste Base64 Ciphertext"
-                ></textarea>
+.panel .divider + label {
+    margin-top: 0;
+}
 
 
+/* =========================
+   INPUTS AND TEXTAREAS
+========================= */
 
-                <button
-                    id="decryptBtn"
-                    class="primary-btn"
-                >
-                    Decrypt Message
-                </button>
+.panel input,
+.panel textarea {
+    display: block;
 
+    width: 100%;
 
+    background: #1e1b2e;
 
-                <label>
-                    Decrypted Plaintext Output
-                </label>
+    color: #f5f3ff;
 
-                <div
-                    id="decryptedOutput"
-                    class="decrypted-output"
-                >
-                    Waiting for decryption...
-                </div>
+    border: 1px solid #625d7c;
 
-            </section>
+    border-radius: 8px;
 
-        </main>
+    padding: 13px;
 
+    font-family: "Courier New", monospace;
 
+    font-size: 14px;
+}
 
-        <!-- STATUS -->
 
-        <section class="status-box">
+/* Textareas */
 
-            <strong>Status:</strong>
+.panel textarea {
+    min-height: 95px;
 
-            <span id="status">
-                Ready. Enter a message and click Encrypt Message.
-            </span>
+    resize: vertical;
+}
 
-        </section>
 
+/* Input */
 
+.panel input {
+    height: 48px;
+}
 
-        <footer>
 
-            <p>
-                Educational Hybrid Encryption Project
-                • AES-GCM + RSA-OAEP
-            </p>
+/* =========================
+   FOCUS EFFECT
+========================= */
 
-        </footer>
+.panel input:focus,
+.panel textarea:focus {
+    outline: none;
 
-    </div>
+    border-color: #9b8ae6;
 
+    box-shadow:
+        0 0 0 3px
+        rgba(155, 138, 230, 0.15);
+}
 
-    <script src="script.js"></script>
 
-</body>
-</html>
+/* =========================
+   READ ONLY OUTPUT
+========================= */
+
+.readonly-output {
+    background: #1a1829 !important;
+
+    color: #d5d0e5 !important;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
+.primary-btn {
+    border: none;
+
+   
